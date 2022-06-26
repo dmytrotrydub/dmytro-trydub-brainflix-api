@@ -1,14 +1,19 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-// const videoList = require("./data/videos.json");
+const dotenv = require("dotenv");
+const routes = require("./routes/videos");
+
+dotenv.config();
+console.log(`Connecting to port ${process.env.PORT}`);
 
 app.use(express.json());
 app.use(cors());
 
-console.log();
+app.use("/", routes);
 
-app.use("/",)
-// const someData = videoList.map(videos => {
-    
-// })
+const listener = app.listen(process.env.PORT, () => {
+  console.log(
+    `Listening of port of : ${process.env.PORT} on localhost ${process.env.URL}${process.env.PORT}`
+  );
+});
