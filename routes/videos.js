@@ -8,10 +8,9 @@ router.use(express.json());
 router.get("/videos", (req, res) => {
   console.log(req.body);
   if (req.body) {
-    console.log(`Reqest received with a body of : ${req.body}`);
+    console.log(`Reqest received for a video list`);
 
-
-    res.send(videos).status(200);
+    res.send(fullVideoDetails).status(200);
   } else {
     throw new Error("Request denied");
   }
@@ -19,31 +18,29 @@ router.get("/videos", (req, res) => {
 
 router.get("/video", (req, res) => {
   if (req.body) {
-    console.log(`Reqest received with a body of : ${req.body}`);
+    console.log(`Reqest received for a first video`);
     // console.log(fullVideoDetails);
-      res.send(fullVideoDetails[0]).status(200);
+    res.send(fullVideoDetails[0]).status(200);
   } else {
-    throw new Error("Request denied")
-    
+    throw new Error("Request denied");
   }
 });
 
-// router.get("/video:id", (req, res) => {
-//   console.log(req.body);
-//   if (req.body) {
-//     console.log(`Request received with a body of : ${req.body} `);
+router.get("/video/:id", (req, res) => {
+  if (req.body) {
+    console.log(req.params.id);
+    console.log(`Request received for a chosen video id`);
 
+    const requestedVideoId = req.params.id;
+    console.log(requestedVideoId);
 
-//     const requestedVideoId = req.params.id;
+    console.log(`Getting requested video with an id of : ${requestedVideoId}`);
 
-//     console.log(`Getting requested video with an id of : ${requestedVideoId}`);
+    const requestedVideo = fullVideoDetails.filter((video) => requestedVideoId === video.id);
 
-//     const requestedVideo = videos.find((video) => requestedVideoId === video.id);
-//     //   const formReqVideo = res.json(requestedVideo);
-//       console.log(requestedVideo);
-//     //   res.send('Hello')
-//     res.send(requestedVideo).status(200);
-//   }
-// });
+    console.log(requestedVideo);
+    res.send(requestedVideo).status(200);
+  }
+});
 
 module.exports = router;
