@@ -43,8 +43,6 @@ const requestedVideoById = (req, res) => {
     const requestedVideo = fullVideoDetails.find((video) => requestedVideoId === `:${video.id}`);
 
     console.log(requestedVideo);
-    // res.send("connection established").status(200);
-    //   const mutatedVideo = res.json(requestedVideo)
     res.send(requestedVideo).status(200);
   } else {
     throw new Error("Request denied");
